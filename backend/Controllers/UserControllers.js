@@ -19,7 +19,7 @@ const getAllUsers = async(req, res, next) => {
     return res.status(200).json({ users });
 }
 
-//date insert
+// date insert
 const addUsers = async (req, res, next) => {
     const {name,gmail,age,address} = req.body;
 
@@ -37,8 +37,48 @@ const addUsers = async (req, res, next) => {
         return res.status(404).json({message:"Unable to add users"});
     }
     return res.status(200).json({ users });
+}
+
+const getById = async(req, res, next) => {
+    const id = req.params.id;
+
+    let users;
+
+    try{
+        users = await User.findById(id);
+    } catch (err) {
+        console.log(err);
+    }
+
+    //Not available user
+    if(!users){
+        return res.status(404).json({message:"User not found"});
+    }
+    return res.status(200).json({ users });
+}
+
+// update user details
+const updateUser = async(req, res, next) => {
+    const id = req.params.id;
+    const {name,gmail,age,address} = req.body;
+
+    let users;
     
+    try{
+        users = await User.findByIdAndUpdate(id, {name,gmail,age,address});
+        users = await users.save();
+    } catch (err) {
+        console.log(err);
+    }
+
+    //Not available user
+    if(!users){
+        return res.status(404).json({message:"Unable to update user details"});
+    }
+    return res.status(200).json({ users });
 }
 
 exports.getAllUsers = getAllUsers;
 exports.addUsers = addUsers;
+exports.getById = getById;
+exports.updateUser = updateUser;
