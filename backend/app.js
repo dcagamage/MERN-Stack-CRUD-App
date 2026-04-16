@@ -1,18 +1,16 @@
 //password = XTUWIKqhjjCvbivd
-
-const express = require("express");
-const mongoose = require("mongoose");
-
 //MongoDB querySrv ECONNREFUSED issue fix
 const dns = require("dns");
 dns.setServers(["1.1.1.1", "8.8.8.8"])
 
+const express = require("express");
+const mongoose = require("mongoose");
+const router = require("./Routes/UserRoutes"); 
+
 const app = express();
 
 //Middleware
-app.use("/",(req, res) => {
-    res.send("It is Working....");
-})
+app.use("/users",router);
 
 mongoose.connect("mongodb+srv://admin:XTUWIKqhjjCvbivd@cluster0.awbtuer.mongodb.net/")
 .then(() => console.log("Connected to MongoDB"))
