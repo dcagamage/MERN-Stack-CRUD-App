@@ -6,6 +6,10 @@ const userSchema = new Schema({
         type:String,  //dataType
         required:true, //validate
     },
+    gmail:{
+        type:String,
+        required:true,
+    },
     age:{
         type:Number,
         required:true,

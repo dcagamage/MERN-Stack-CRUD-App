@@ -10,6 +10,7 @@ const UserController = require("../Controllers/UserControllers");
 // console.log("Is function defined?", UserController.getAllUsers);
 
 router.get("/",UserController.getAllUsers);
+router.post("/",UserController.addUsers);
 
 //export
 module.exports = router;
