@@ -1,9 +1,17 @@
 import React from 'react'
-import { Link } from 'react-router-dom';
+import axios from 'axios';
+import { Link, useNavigate } from 'react-router-dom';
 
 function User(props) {
-
   const { _id, name, gmail, age, address } = props.user;
+  
+  const history = useNavigate();
+  const deleteHandler = async() => {
+    await axios.delete(`http://localhost:5000/users/${_id}`)
+    .then(res=>res.data)
+    .then(() => history("/userdetails"))
+    window.location.reload();
+  }
 
   return (
     <div>
@@ -15,7 +23,7 @@ function User(props) {
       <h3>Age: {age}</h3>
       <h3>Addess: {address}</h3>
       <Link to={`/userdetails/${_id}`}>Update</Link>
-      <button>Delete</button>
+      <button onClick={deleteHandler}>Delete</button>
       <br/><br/>
     </div>
   )
