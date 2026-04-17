@@ -37,6 +37,16 @@ function Users() {
     });
   };
 
+  const handleSendReport = () => {
+    const phoneNumber = "+94777077828";
+    const message = `Selected User Report`;
+    const whatsappUrl = `https://web.whatsapp.com/send?phone=${phoneNumber}&text=${encodeURIComponent(
+      message
+    )}`;
+
+    window.open(whatsappUrl,"_blank");
+  }
+
   return (
     <div>
       <Nav />
@@ -66,6 +76,8 @@ function Users() {
         </div>
       )}
       <button onClick={handlePrint}>Download Report</button>
+      <br/>
+      <button onClick={handleSendReport}>Send WhatsApp Message</button>
     </div>
   );
 }
