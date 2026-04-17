@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 
 function User(props) {
 
@@ -13,7 +14,7 @@ function User(props) {
       <h3>Gmail: {gmail}</h3>
       <h3>Age: {age}</h3>
       <h3>Addess: {address}</h3>
-      <button>Update</button>
+      <Link to={`/userdetails/${_id}`}>Update</Link>
       <button>Delete</button>
       <br/><br/>
     </div>
