@@ -1,11 +1,19 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Nav from "../Nav/Nav";
+import PdfComp from "./PdfComp";
+import { pdfjs } from 'react-pdf';
+
+pdfjs.GlobalWorkerOptions.workerSrc = new URL(
+  'pdfjs-dist/build/pdf.worker.min.mjs',
+  import.meta.url,
+).toString();
 
 function SendPdf() {
   const [title, setTitle] = useState("");
   const [file, saveFile] = useState("");
-//   const [allPdf, setAllPdf] = useState("");
+  const [allPdf, setAllPdf] = useState(null);
+  const [pdfFile, setPdfFile] = useState(null);
 
   useEffect(() => {
     getPdf();
@@ -14,7 +22,7 @@ function SendPdf() {
   const getPdf = async () => {
     const result = await axios.get("http://localhost:5000/getfile");
     console.log(result.data.data);
-    // setAllPdf(result.data.data);
+    setAllPdf(result.data.data);
   };
 
   const submitPdf = async (e) => {
@@ -46,6 +54,10 @@ function SendPdf() {
     }
   };
 
+  const showPdf = (pdf) => {
+    setPdfFile(`http://localhost:5000/files/${pdf}`);
+  };
+
   return (
     <div>
       <Nav />
@@ -70,6 +82,18 @@ function SendPdf() {
         <br />
         <button>Submit</button>
       </form>
+      <br/><br/>
+
+      <div>
+        <h3>Pdf Details</h3>
+        {allPdf == null ? "" : allPdf.map((data)=> (
+          <div key={(data._id)}>
+            <h1>Title: {data.title}</h1>
+            <button onClick={() => showPdf(data.pdf)}>Show Pdf</button>
+          </div>
+        ))}
+      </div>
+      <PdfComp pdfFile={pdfFile}/>
     </div>
   );
 }
