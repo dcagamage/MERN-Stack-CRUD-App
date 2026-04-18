@@ -9,6 +9,7 @@ import Register from './Components/Register/Register';
 import Login from './Components/Login/Login';
 import ContactUs from './Components/ContactUs/ContactUs';
 import SendPdf from './Components/SendPdf/SendPdf';
+import Imguploader from './Components/ImgUploader/Imguploader';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
           <Route path="/login" element={ <Login/> }/>
           <Route path="/contactus" element={ <ContactUs/> }/>
           <Route path="/sendpdf" element={ <SendPdf/> }/>
+          <Route path="/imgpart" element={ <Imguploader/> }/>
         </Routes>
       </React.Fragment>
     </div>

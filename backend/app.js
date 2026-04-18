@@ -99,3 +99,46 @@ app.get("/getfile", async (req, res) => {
     res.status(500).send({ status: "error" });
   }
 });
+
+// Img Part 
+
+require("./Model/ImgModel");
+const ImgSchema = mongoose.model("ImgModel");
+
+const multerimg = require("multer");
+
+const storageimg = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null,"../frontend/src/Components/ImgUploader/files")
+  },
+  filename: function (req,file,cb){
+    const uniqueSuffix = Date.now();
+    cb(null,uniqueSuffix + file.originalname);
+  }
+});
+
+const uploadimg = multerimg({storage: storage});
+
+app.post("/uploadimg", upload.single("image"),async(req,res) => {
+  console.log(req.body);
+  const imageName = req.file.filename;
+
+  try{
+    await ImgSchema.create({image:imageName});
+    res.json({status: "ok"});
+  } catch (error) {
+    res.json({status: error});
+  }
+});
+
+// Display Image
+
+app.get("/getimage", async (req,res) => {
+  try{
+    ImgSchema.find({}).then((data) => {
+      res.send({status: "ok",data:data});
+    });
+  } catch (error) {
+    res.json({status: error})
+  }
+})
