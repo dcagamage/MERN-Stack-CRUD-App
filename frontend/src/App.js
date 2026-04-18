@@ -7,6 +7,7 @@ import Users from './Components/UserDetails/Users';
 import UpdateUser from './Components/UpdateUser/UpdateUser';
 import Register from './Components/Register/Register';
 import Login from './Components/Login/Login';
+import ContactUs from './Components/ContactUs/ContactUs';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path="/userdetails/:id" element={ <UpdateUser/> }/>
           <Route path="/register" element={ <Register/> }/>
           <Route path="/login" element={ <Login/> }/>
+          <Route path="/contactus" element={ <ContactUs/> }/>
         </Routes>
       </React.Fragment>
     </div>
