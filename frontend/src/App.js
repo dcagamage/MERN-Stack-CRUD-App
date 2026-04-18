@@ -8,6 +8,7 @@ import UpdateUser from './Components/UpdateUser/UpdateUser';
 import Register from './Components/Register/Register';
 import Login from './Components/Login/Login';
 import ContactUs from './Components/ContactUs/ContactUs';
+import SendPdf from './Components/SendPdf/SendPdf';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path="/register" element={ <Register/> }/>
           <Route path="/login" element={ <Login/> }/>
           <Route path="/contactus" element={ <ContactUs/> }/>
+          <Route path="/sendpdf" element={ <SendPdf/> }/>
         </Routes>
       </React.Fragment>
     </div>
